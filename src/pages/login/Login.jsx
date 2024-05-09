@@ -1,7 +1,19 @@
 import { Link } from 'react-router-dom';
 import '../login/login.css'
+import { useForm } from 'react-hook-form';
 
 const Login = () => {
+
+    const {
+		register,
+		handleSubmit,
+		formState: { errors },
+	  } = useForm()
+
+      const onSubmit = (data) => {
+        console.log(data)
+      }
+
     return (
         <div className='pattern'>
             <div className="flex flex-col items-center py-6 lg:h-[37rem] lg:flex-row mx-10">
@@ -20,10 +32,13 @@ const Login = () => {
                         <div className="px-6 py-8 text-center">
                             <h2 className="text-2xl font-semibold text-gray-700 dark:text-white fo">Sign In</h2>
 
-                            <form action="#">
+                            <form onSubmit={handleSubmit(onSubmit)}  action="#">
                                 <div className="mt-4">
-                                    <input className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring" type="email" placeholder="Email address" aria-label="Email address" />
-                                    <input className="block w-full px-4 py-2 mt-4 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-blue-400 dark:focus:border-blue-300 focus:ring-opacity-40 focus:ring-blue-300 focus:outline-none focus:ring" type="password" placeholder="Password" aria-label="Password" />
+                                    <input className="block w-full px-4 py-2 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-yellow-400 dark:focus:border-yellow-300 focus:ring-opacity-40 focus:ring-yellow-300 focus:outline-none focus:ring" type="email" placeholder="Email address" 
+                                    aria-label="Email address" 
+                                    {...register("email", { required: true })}/>
+                                    <input className="block w-full px-4 py-2 mt-4 text-gray-700 placeholder-gray-400 bg-white border rounded-md dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-500 focus:border-yellow-400 dark:focus:border-yellow-300 focus:ring-opacity-40 focus:ring-yellow-300 focus:outline-none focus:ring" type="password" placeholder="Password" aria-label="Password"
+                                      {...register("password", { required: true })} />
                                 </div>
 
                                 <div className="flex items-center justify-between mt-4">
