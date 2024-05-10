@@ -1,0 +1,26 @@
+.leaflet-container {
+    height: 600px;
+    width: 500px;
+  }
+  
+  .leaflet-map {
+    height: 100%;
+    width: 100%;
+  }
+
+
+/* Media query for phones */
+@media (max-width: 768px) {
+  .leaflet-container {
+      height: 300px; 
+      width: 100%; 
+  }
+}
+
+/* Media query for tablets */
+@media (min-width: 768px) and (max-width: 1024px) {
+  .leaflet-container {
+      height: 350px; 
+      width: 100%; 
+  }
+}

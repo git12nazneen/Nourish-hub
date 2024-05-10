@@ -1,25 +1,40 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
+import swal from 'sweetalert';
+import useAuth from '../hooks/useAuth';
+import { Tooltip } from 'react-tooltip';
 
 const Nav = () => {
+    const {  user,  logOut}= useAuth()
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {
         setIsOpen(!isOpen);
     };
 
+      // logout implement
+
+  const handleSignOut = () =>{
+    logOut().then().catch();
+    swal({
+      text:'logout success',
+      icon:'success'
+    })
+  }
+
     const navLinks = (
         <>
         <li><NavLink to='/'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Home</a></NavLink></li>
 
-        <li><NavLink to='/availableFoods'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Available Foods</a></NavLink></li>
+        <li><NavLink to='/room'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Rooms</a></NavLink></li>
 
-        <li><NavLink to='/addFood'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Add Food</a></NavLink></li>
+        <li><NavLink to='/about'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">About us</a></NavLink></li>
 
-        <li><NavLink to='/myFoodReq'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">My Food & Request</a></NavLink></li>
+        <li><NavLink to='/myRoom'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">My Rooms</a></NavLink></li>
 
-        <li><NavLink to='/login'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Login</a></NavLink></li>
+        <li><NavLink to='/contact'> <a className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0" href="#">Contact</a></NavLink></li>
         </>
+       
     )
 
     return (
@@ -49,10 +64,54 @@ const Nav = () => {
                     <div className={`absolute inset-x-0 z-20 w-full px-6 py-4 transition-all duration-300 ease-in-out bg-white dark:bg-gray-800 md:mt-0 md:p-0 md:top-0 md:relative md:bg-transparent md:w-auto md:opacity-100 md:translate-x-0 md:flex md:items-center ${isOpen ? 'block' : 'hidden'}`}>
                         <div className="flex flex-col md:flex-row md:mx-6">
                            
-                              {navLinks}
+                              {navLinks}  
                         </div>
                         <div className="flex justify-center md:block">
-                            
+                            <div>
+                            {
+              user?.email ? (
+                <div className="dropdown dropdown-end z-50">
+              <label tabIndex={0} className="btn btn-ghost btn-circle avatar">
+                <div className="w-10 rounded-full">
+                 <button data-tooltip-id="my-tooltip" data-tooltip-content={user?.displayName}>
+                 <img
+                    src={
+                      user?.photoURL
+                        ? user.photoURL
+                        : "https://media.istockphoto.com/id/1211308812/vector/account.jpg?s=1024x1024&w=is&k=20&c=VzSNfBzXzlHYLix-nJp3hiLxUjTayBuLJOKsWHY2yj4="
+                    }
+                    alt="User"
+                  />
+                 </button>
+                 <Tooltip id="my-tooltip"></Tooltip>
+                </div>
+              </label>
+              <ul
+                tabIndex={0}
+                className="menu dropdown-content z-[1] p-2 shadow bg-base-100 rounded-box w-52 mt-4"
+              >
+                <li>
+                  <button className="btn btn-sm btn-ghost">
+                    {user?.displayName || "name not found"}
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={handleSignOut}
+                    className="btn btn-sm btn-ghost"
+                  >
+                    Logout
+                  </button>
+                </li>
+              </ul>
+            </div>
+              ) : (
+                <Link to="/login">
+                <a className="btn btn-outline">Login</a>
+              </Link>
+              )
+            }
+                            </div>
                         </div>
                     </div>
                 </div>

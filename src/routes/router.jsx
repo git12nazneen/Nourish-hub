@@ -5,11 +5,12 @@ import {
 import Root from '../layout/Root';
 import Error from '../components/Error';
 import Home from '../pages/home/Home';
-import AvailableFoods from '../pages/availableFood/AvailableFoods';
-import AddFood from '../pages/addFood/AddFood';
-import MyFoodReq from '../pages/myFood/MyFoodReq';
 import Login from '../pages/login/Login';
 import Register from '../pages/Register';
+import Contact from '../pages/Contact';
+import MyRooms from '../pages/myRooms/MyRooms';
+import Room from '../pages/room/Room';
+import About from '../pages/about/About';
 
   const router = createBrowserRouter([
     {
@@ -22,15 +23,15 @@ import Register from '../pages/Register';
             element:<Home></Home>
         },
         {
-            path:'/availableFoods',
-            element:<AvailableFoods></AvailableFoods>
+            path:'/about',
+            element:<About></About>
         },{
-            path:'/addFood',
-            element:<AddFood></AddFood>
+            path:'/room',
+            element:<Room></Room>
         },
         {
-            path:'/myFoodReq',
-            element:<MyFoodReq></MyFoodReq>
+            path:'/myRoom',
+            element:<MyRooms></MyRooms>
         },
         {
             path:'/login',
@@ -39,6 +40,10 @@ import Register from '../pages/Register';
         {
             path:'/register',
             element:<Register></Register>
+        },
+        {
+            path:'/contact',
+            element:<Contact></Contact>
         }
       ]
     },

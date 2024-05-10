@@ -1,11 +1,11 @@
 import React from 'react';
 
-const MyFoodReq = () => {
+const About = () => {
     return (
         <div>
-            mmmmmmmmm
+            aaaaa
         </div>
     );
 };
 
-export default MyFoodReq;
+export default About;
