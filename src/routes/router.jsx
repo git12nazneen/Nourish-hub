@@ -27,7 +27,8 @@ import About from '../pages/about/About';
             element:<About></About>
         },{
             path:'/room',
-            element:<Room></Room>
+            element:<Room></Room>,
+            loader:()=>fetch('http://localhost:5000/room')
         },
         {
             path:'/myRoom',
