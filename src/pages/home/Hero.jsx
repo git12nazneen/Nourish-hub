@@ -1,5 +1,6 @@
-import banner from '../../assets/banner1.jpg'
-import banner1 from '../../assets/banner2.jpg'
+import banner from '../../../public/banner1.jpg'
+// import banner1 from '../../assets/banner2.jpg'
+
 import banner2 from '../../assets/banner3.jpg'
 
 const Hero = () => {
@@ -17,7 +18,7 @@ const Hero = () => {
           {/* <div class="h-[30rem] md:h-[calc(100vh-106px)]  flex flex-col bg-[url( `url(${banner})`)] bg-cover bg-center bg-no-repeat"> */}
           <div
             className="h-[30rem] md:h-[calc(100vh-106px)]  flex flex-col bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${banner})` }} // Use inline style to set the background image
+            style={{ backgroundImage: `url('${banner}')` }} // Use inline style to set the background image
         >
             <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10 ">
               <span class="block text-black font-extrabold text-2xl">Tasty Food</span>
@@ -36,7 +37,7 @@ const Hero = () => {
         <div class="hs-carousel-slide">
         <div
             className="h-[30rem] md:h-[calc(100vh-106px)]  flex flex-col bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${banner1})` }} // Use inline style to set the background image
+            style={{ backgroundImage: "url('banner1.jpg')" }} // Use inline style to set the background image
         >
             <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
               <span class="block text-black font-extrabold text-2xl">CoolApps</span>
@@ -55,7 +56,7 @@ const Hero = () => {
         <div class="hs-carousel-slide">
         <div
             className="h-[30rem] md:h-[calc(100vh-106px)] flex flex-col bg-cover bg-fixed bg-center bg-no-repeat"
-            style={{ backgroundImage: `url(${banner2})` }} // Use inline style to set the background image
+            style={{ backgroundImage: `url('{banner2}')` }} // Use inline style to set the background image
         >
             <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
               <span class="block text-black font-extrabold text-2xl">Grumpy</span>
