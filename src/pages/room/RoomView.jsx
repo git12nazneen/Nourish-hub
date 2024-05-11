@@ -4,6 +4,7 @@ import DatePicker from "react-datepicker";
 import useAuth from "../../hooks/useAuth";
 
 import "react-datepicker/dist/react-datepicker.css";
+import swal from "sweetalert";
 const RoomView = () => {
   const { user } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
@@ -25,10 +26,46 @@ const RoomView = () => {
     country,
   } = roomView;
 
-  // useEffect(() => {
-  //   // Update input field value when user object changes
-  //   // This ensures that the input field reflects the latest user email
-  // }, [user]);
+ 
+
+  const handleConfirmBooking = () =>{
+    // e.preventDefault()
+    const email = user?.email
+    console.log(email)
+    console.log("Hotel Name:", hotel_name);
+    console.log("Price Per Night:", price_per_night);
+    console.log("Date:", startDate);
+    const hotel = hotel_name
+    const price = price_per_night
+    const date = startDate
+    const info ={hotel,price,date,email}
+    console.log(info)
+
+
+    fetch('http://localhost:5000/booking', {
+      method:'POST',
+      headers:{
+        'content-type':'application/json',
+        
+      },
+      credentials: 'include',
+      body:JSON.stringify(info)
+    })
+    .then(res=> res.json()
+  
+  )
+    .then(data=>{
+      console.log('getting data',data);
+      if(data.insertedId){
+        swal ( "Done" ,  "Success booking room " ,  "success" )
+      }
+    })
+    .catch(error=>{
+      console.error(error)
+    })
+  }
+
+ 
   return (
     <div>
       <section class="bg-white dark:bg-gray-900">
@@ -45,10 +82,11 @@ const RoomView = () => {
                 </h1>
                 <p className="my-1">Hotel name:{hotel_name}</p>
                 <p>Special Offers:{special_offers}</p>
-                {/* <button className="btn btn-outline btn-warning my-2">Book now</button> */}
+               
                 {/* Open the modal using document.getElementById('ID').showModal() method */}
                 <button
                   className="btn  btn-outline btn-warning my-2"
+                
                   onClick={() =>
                     document.getElementById("my_modal_1").showModal()
                   }
@@ -91,8 +129,12 @@ const RoomView = () => {
                       </div>
                       <div className="modal-action">
                         <form method="dialog">
-                          {/* if there is a button in form, it will close the modal */}
-                          <button className="btn">Confirm book</button>
+                      
+                          <button 
+                          type="button"
+                          onClick={handleConfirmBooking}
+                          className="btn"
+                         >Confirm book</button>
                         </form>
                       </div>
                     </div>

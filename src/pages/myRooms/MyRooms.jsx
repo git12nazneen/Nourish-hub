@@ -1,6 +1,21 @@
-import React from 'react';
+import { useEffect, useState } from "react";
+import useAuth from "../../hooks/useAuth";
+import axios from "axios";
 
 const MyRooms = () => {
+  const {user} = useAuth();
+  const [booking, setBooking] = useState([])
+
+  useEffect(()=>{
+    const getData = async () =>{
+      const data = await axios(`http://localhost:5000/booking/${user?.email}`)
+      setBooking(data)
+    }
+  
+    getData()
+  },[user])
+
+  console.log(booking)
     return (
        <div className='max-w-6xl mx-auto my-10'>
          <section className='container px-4 mx-auto pt-12'>
@@ -8,7 +23,7 @@ const MyRooms = () => {
             <h2 className='text-lg font-medium text-gray-800 '>My Booking rooms</h2>
     
             <span className='px-3 py-1 text-xs text-blue-600 bg-blue-100 rounded-full '>
-              05 Jobs
+              {booking.length} Booking
             </span>
           </div>
     
@@ -63,7 +78,8 @@ const MyRooms = () => {
                       </tr>
                     </thead>
                     <tbody className='bg-white divide-y divide-gray-200 '>
-                      <tr>
+                      {booking.map(books =>{
+                        <tr key={books._id}>
                         <td className='px-4 py-4 text-sm text-gray-500  whitespace-nowrap'>
                           Build Dynamic Website
                         </td>
@@ -129,6 +145,7 @@ const MyRooms = () => {
                           </div>
                         </td>
                       </tr>
+                      })}
                     </tbody>
                   </table>
                 </div>
