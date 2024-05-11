@@ -6,7 +6,7 @@ import { Tooltip } from 'react-tooltip';
 
 const Nav = () => {
     const {  user,  logOut}= useAuth()
-    console.log('nav,', user)
+    // console.log('nav,', user)
     const [isOpen, setIsOpen] = useState(false);
 
     const toggleMenu = () => {

@@ -95,7 +95,7 @@ const RoomView = () => {
                 </button>
                 <div className="h-80">
                   <dialog id="my_modal_1" className="modal ">
-                    <div className="modal-box h-96">
+                    <div className="modal-box h-80% w-11/12 max-w-5xl">
                       <p className="my-1 font-bold text-2xl text-yellow-600">
                         Hotel name: {hotel_name}
                       </p>
@@ -124,7 +124,7 @@ const RoomView = () => {
                           />
                         </label>
                       </form>
-                      <div className="">
+                      <div className="pt-12">
                      Choose date : <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
                       </div>
                       <div className="modal-action">
