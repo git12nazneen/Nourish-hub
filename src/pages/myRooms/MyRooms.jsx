@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
+import Swal from "sweetalert2";
 
 const MyRooms = () => {
   const { user } = useAuth();
@@ -13,6 +14,35 @@ const MyRooms = () => {
       .then((data) => setBooking(data));
   }, [user]);
   console.log(booking);
+
+  const handleDelete = _id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+      if (result.isConfirmed) {
+          fetch(`http://localhost:5000/booking/${_id}`, {
+              method: 'DELETE'
+          })
+          .then(res => res.json())
+          .then(data => {
+              if (data.deletedCount > 0) {
+                setBooking(prevBookings => prevBookings.filter(booking => booking._id !== _id));
+                  Swal.fire({
+                      title: "Deleted!",
+                      text: "Your cart has been deleted.",
+                      icon: "success"
+                  });
+              }
+          });
+      }
+  });
+  }
 
 
   return (
@@ -84,7 +114,7 @@ const MyRooms = () => {
                       
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
-                            <button className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
+                            <button onClick={() => handleDelete(books._id)} className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
