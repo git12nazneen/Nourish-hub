@@ -2,11 +2,54 @@ import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
 
+import DatePicker from "react-datepicker";
+
+import "react-datepicker/dist/react-datepicker.css";
+
 const MyRooms = () => {
   const { user } = useAuth();
-  console.log(user)
+  console.log("user", user);
   const [booking, setBooking] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [startDate, setStartDate] = useState(new Date());
+  const openModal = () => {
+    setIsOpen(true);
+  };
 
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+  const handleUpdate = (bookingId) => {
+    const updatedBooking = {
+      id: bookingId, // Include the _id of the booking
+      date: startDate, // Use the selected date
+    };
+  
+    fetch(`http://localhost:5000/booking/${bookingId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedBooking),
+    })
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data);
+        if (data.success) {
+          Swal.fire({
+            icon: 'success',
+            title: 'Update Successful',
+            text: 'Booking date updated successfully.',
+          });
+          closeModal();
+        }
+      })
+      .catch((error) => {
+        console.error("Error updating booking date:", error);
+       
+      });
+  };
+  
 
   useEffect(() => {
     fetch(`http://localhost:5000/booking/${user?.email}`)
@@ -15,7 +58,7 @@ const MyRooms = () => {
   }, [user]);
   console.log(booking);
 
-  const handleDelete = _id => {
+  const handleDelete = (_id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -23,27 +66,28 @@ const MyRooms = () => {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!"
-  }).then((result) => {
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
       if (result.isConfirmed) {
-          fetch(`http://localhost:5000/booking/${_id}`, {
-              method: 'DELETE'
-          })
-          .then(res => res.json())
-          .then(data => {
-              if (data.deletedCount > 0) {
-                setBooking(prevBookings => prevBookings.filter(booking => booking._id !== _id));
-                  Swal.fire({
-                      title: "Deleted!",
-                      text: "Your cart has been deleted.",
-                      icon: "success"
-                  });
-              }
+        fetch(`http://localhost:5000/booking/${_id}`, {
+          method: "DELETE",
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            if (data.deletedCount > 0) {
+              setBooking((prevBookings) =>
+                prevBookings.filter((booking) => booking._id !== _id)
+              );
+              Swal.fire({
+                title: "Deleted!",
+                text: "Your cart has been deleted.",
+                icon: "success",
+              });
+            }
           });
       }
-  });
-  }
-
+    });
+  };
 
   return (
     <div className="max-w-6xl mx-auto my-10">
@@ -54,7 +98,7 @@ const MyRooms = () => {
           </h2>
 
           <span className="px-3 py-1 text-xs text-blue-600 bg-yellow-100 rounded-full ">
-            {booking.length} 
+            {booking.length}
             Booking room
           </span>
         </div>
@@ -104,17 +148,19 @@ const MyRooms = () => {
                         </td>
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                        {new Date(books.date).toLocaleDateString()}
-
+                          {new Date(books.date).toLocaleDateString()}
                         </td>
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
                           Price: {books.price}
                         </td>
-                      
+
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
-                            <button onClick={() => handleDelete(books._id)} className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none">
+                            <button
+                              onClick={() => handleDelete(books._id)}
+                              className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
+                            >
                               <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 fill="none"
@@ -130,23 +176,81 @@ const MyRooms = () => {
                                 />
                               </svg>
                             </button>
-
-                            <button className="text-gray-500 transition-colors duration-200   hover:text-yellow-500 focus:outline-none">
-                              <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                fill="none"
-                                viewBox="0 0 24 24"
-                                strokeWidth="1.5"
-                                stroke="currentColor"
-                                className="w-5 h-5"
+                            <div className="relative flex justify-center">
+                              <button
+                                onClick={openModal}
+                                className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                               >
-                                <path
-                                  strokeLinecap="round"
-                                  strokeLinejoin="round"
-                                  d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-                                />
-                              </svg>
-                            </button>
+                                Update
+                              </button>
+
+                              {isOpen && (
+                                <div
+                                  className="fixed inset-0 z-10 overflow-y-auto"
+                                  aria-labelledby="modal-title"
+                                  role="dialog"
+                                  aria-modal="true"
+                                >
+                                  <div className="flex items-end justify-center min-h-screen px-4 pt-4 pb-20  text-center sm:block sm:p-0">
+                                    <span
+                                      className="hidden sm:inline-block sm:align-middle sm:h-screen"
+                                      aria-hidden="true"
+                                    >
+                                      &#8203;
+                                    </span>
+
+                                    <div className="relative inline-block px-4 pt-5 pb-4 overflow-hidden text-left align-bottom transition-all transform bg-white rounded-lg shadow-xl rtl:text-right dark:bg-gray-900 sm:my-8 sm:align-middle sm:max-w-sm sm:w-full sm:p-6">
+                                      <div>
+                                        <div className="my-10  text-center">
+                                          <h3
+                                            className="text-lg font-medium leading-6 text-gray-800 capitalize dark:text-white"
+                                            id="modal-title"
+                                          >
+                                            Update your date
+                                          </h3>
+                                          <div className="border-yellow-600 border p-2 rounded-sm mt-40 ">
+                                            <DatePicker
+                                              selected={startDate}
+                                              onChange={(date) =>
+                                                setStartDate(date)
+                                              }
+                                              defaultValue=   {new Date(books.date).toLocaleDateString()} 
+                                            />
+                                          </div>
+                                        </div>
+                                      </div>
+
+                                      <div className="mt-5 sm:flex sm:items-center sm:justify-between">
+                                        <a
+                                          href="#"
+                                          className="text-sm text-blue-500 hover:underline"
+                                        >
+                                          Learn more
+                                        </a>
+
+                                        <div className="sm:flex sm:items-center">
+                                          <button
+                                            onClick={closeModal}
+                                            className="w-full px-4 py-2 mt-2 text-sm font-medium tracking-wide text-gray-700 capitalize transition-colors duration-300 transform border border-gray-200 rounded-md sm:mt-0 sm:w-auto sm:mx-2 dark:text-gray-200 dark:border-gray-700 dark:hover:bg-gray-800 hover:bg-gray-100 focus:outline-none focus:ring focus:ring-gray-300 focus:ring-opacity-40"
+                                          >
+                                            Cancel
+                                          </button>
+
+                                          <button
+                                            onClick={() =>
+                                              handleUpdate(books._id)
+                                            }
+                                            className="text-gray-500 transition-colors duration-200 hover:text-blue-500 focus:outline-none"
+                                          >
+                                            Update
+                                          </button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )}
+                            </div>
                           </div>
                         </td>
                       </tr>
