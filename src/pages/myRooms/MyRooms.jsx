@@ -3,16 +3,18 @@ import useAuth from "../../hooks/useAuth";
 
 const MyRooms = () => {
   const { user } = useAuth();
-  // console.log(user)
+  console.log(user)
   const [booking, setBooking] = useState([]);
 
 
   useEffect(() => {
-    fetch("http://localhost:5000/booking")
+    fetch(`http://localhost:5000/booking/${user?.email}`)
       .then((res) => res.json())
       .then((data) => setBooking(data));
-  }, []);
+  }, [user]);
   console.log(booking);
+
+
   return (
     <div className="max-w-6xl mx-auto my-10">
       <section className="container px-4 mx-auto pt-12">
@@ -72,7 +74,8 @@ const MyRooms = () => {
                         </td>
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                          {books.date}
+                        {new Date(books.date).toLocaleDateString()}
+
                         </td>
 
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
