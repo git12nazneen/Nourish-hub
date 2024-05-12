@@ -1,6 +1,11 @@
 import React, { useEffect, useState } from "react";
 import SingleReview from "./SingleReview";
 
+import { Autoplay, Navigation, Pagination } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+import { Swiper as ReactSwiper, SwiperSlide } from "swiper/react";
+
 const UserReview = () => {
   const [review, setReview] = useState([]);
 
@@ -23,14 +28,28 @@ const UserReview = () => {
           omnis eligendi optio eos harum.
         </p>
       </div>
-      <div class="grid grid-cols-1 gap-8 mx-auto mt-8 lg:grid-cols-3 xl:mt-10 max-w-7xl">
+
+      <ReactSwiper
+        spaceBetween={50}
+        slidesPerView={3}
+        navigation
+        pagination={{ clickable: true }}
+        scrollbar={{ draggable: true }}
+        loop={true}
+        autoplay={{
+          delay: 2500,
+          disableOnInteraction: false,
+        }}
+        modules={[Autoplay,  Navigation]}
+      >
         {review.map((singleReview) => (
-          <SingleReview
-            key={singleReview._id}
-            singleReview={singleReview}
-          ></SingleReview>
+          <SwiperSlide key={singleReview._id}>
+            <SingleReview singleReview={singleReview} />
+          </SwiperSlide>
         ))}
-      </div>
+      </ReactSwiper>
+
+    
     </div>
   );
 };
