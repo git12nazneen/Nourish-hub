@@ -1,6 +1,7 @@
 import { useLoaderData } from "react-router-dom";
 import SingleRoom from "./SingleRoom";
 import { useState } from "react";
+import PostReview from "./PostReview";
 
 const Room = () => {
   const room = useLoaderData();
@@ -52,6 +53,8 @@ const Room = () => {
           ))}
         </div>
       </div>
+
+      <PostReview></PostReview>
     </div>
   );
 };

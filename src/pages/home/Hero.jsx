@@ -1,102 +1,86 @@
-import banner from '../../../public/banner1.jpg'
-// import banner1 from '../../assets/banner2.jpg'
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/effect-flip';
+import 'swiper/css/pagination';
+import 'swiper/css/navigation';
+import { Pagination, Navigation, Autoplay } from 'swiper/modules';
 
-import banner2 from '../../assets/banner3.jpg'
+
+import banner1 from '../../assets/ban2.jpg'
+import banner2 from '../../assets/ban3.jpg'
+import banner3 from '../../assets/ban4.jpg'
+
 
 const Hero = () => {
-    return (
-        <div>
-            {/* <!-- Slider --> */}
-<div class="px-4 lg:px-6 lg:px-8 py-10">
-  <div data-hs-carousel='{
-      "loadingClasses": "opacity-0"
-    }' class="relative">
-    <div class="hs-carousel relative overflow-hidden w-full h-[30rem] md:h-[calc(100vh-106px)]  bg-gray-100 rounded-2xl dark:bg-neutral-800">
-      <div class="hs-carousel-body absolute top-0 bottom-0 start-0 flex flex-nowrap transition-transform duration-700 opacity-0">
-        {/* <!-- Item --> */}
-        <div class="hs-carousel-slide">
-          {/* <div class="h-[30rem] md:h-[calc(100vh-106px)]  flex flex-col bg-[url( `url(${banner})`)] bg-cover bg-center bg-no-repeat"> */}
-          <div
-            className="h-[30rem] md:h-[calc(100vh-106px)]  flex flex-col bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: `url('${banner}')` }} // Use inline style to set the background image
+  return (
+    <div>
+      
+        <Swiper
+            spaceBetween={30}
+            centeredSlides={true}
+            Autoplay={{
+                delay: 1000,
+                disableOnInteraction: false,
+            }}
+            pagination={{
+                clickable: true,
+            }}
+            navigation={true}
+            modules={[Autoplay, Pagination, Navigation]}
+            className="mySwiper"
         >
-            <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10 ">
-              <span class="block text-black font-extrabold text-2xl">Tasty Food</span>
-              <span class="block text-black text-xl md:text-3xl">Rewriting sport's playbook for billions of athletes</span>
-              <div class="mt-5">
-                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-yellow-400 border border-transparent text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="#">
-                  Read Case Studies
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- End Item --> */}
-
-        {/* <!-- Item --> */}
-        <div class="hs-carousel-slide">
-        <div
-            className="h-[30rem] md:h-[calc(100vh-106px)]  flex flex-col bg-cover bg-center bg-no-repeat"
-            style={{ backgroundImage: "url('banner1.jpg')" }} // Use inline style to set the background image
-        >
-            <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
-              <span class="block text-black font-extrabold text-2xl">CoolApps</span>
-              <span class="block text-black text-xl md:text-3xl">From mobile apps to gaming consoles</span>
-              <div class="mt-5">
-                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-yellow-400 border border-transparent text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="#">
-                  Read Case Studies
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- End Item --> */}
-
-        {/* <!-- Item --> */}
-        <div class="hs-carousel-slide">
-        <div
-            className="h-[30rem] md:h-[calc(100vh-106px)] flex flex-col bg-cover bg-fixed bg-center bg-no-repeat"
-            style={{ backgroundImage: `url('{banner2}')` }} // Use inline style to set the background image
-        >
-            <div class="mt-auto w-2/3 md:max-w-lg ps-5 pb-5 md:ps-10 md:pb-10">
-              <span class="block text-black font-extrabold text-2xl">Grumpy</span>
-              <span class="block text-black text-xl md:text-3xl">Bringing Art to everything</span>
-              <div class="mt-5">
-                <a class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-xl bg-yellow-400  border border-transparent text-black hover:bg-gray-100 disabled:opacity-50 disabled:pointer-events-none" href="#">
-                  Read Case Studies
-                </a>
-              </div>
-            </div>
-          </div>
-        </div>
-        {/* <!-- End Item --> */}
-      </div>
+            <SwiperSlide
+                style={{
+                    backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${banner1})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            >
+                <div className="min-h-[500px] md:h-screen flex items-center"  >
+                    <div className="w-full md:w-8/12 mx-auto text-center">
+                        <h4 className='font-bold text-white text-xl md:text-6xl   mb-2'>Textiles are materials</h4>
+                        {/* <h1 className='text-white text-xl md:text-6xl  px-10 xl:px-28 pb-5 md:pb-10  font-bold '> made of natural or synthetic fibers.</h1> */}
+                        <p></p>
+                        <button data-aos="fade-up" data-aos-duration="1600" className='btn border-none text-white  bg-yellow-600 hover:bg-[#0d1637] px-10 text-xl'>Get Start</button>
+                    </div>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide
+                style={{
+                    backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${banner2})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            >
+                <div className="min-h-[500px] md:h-screen flex items-center text-white">
+                    <div className="w-8/12 mx-auto text-center">
+                        <h4 className='font-bold text-white text-xl md:text-6xl   mb-2'>textile is something made </h4>
+                        {/* <h1 className='text-white text-xl md:text-6xl  px-10 xl:px-28 pb-5 md:pb-10  font-bold'> by knitting, crocheting fibers together</h1> */}
+                        <button className='btn border-none text-white  bg-yellow-600 hover:bg-[#0d1637] px-10 text-xl'>Get Start</button>
+                    </div>
+                </div>
+            </SwiperSlide>
+            <SwiperSlide
+                style={{
+                    backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url(${banner3})`,
+                    backgroundPosition: 'center',
+                    backgroundSize: 'cover',
+                    backgroundRepeat: 'no-repeat'
+                }}
+            >
+                <div className="min-h-[500px] md:h-screen flex items-center text-white">
+                    <div className="w-8/12 mx-auto text-center">
+                        <h4 className='font-bold text-xl md:text-6xl   text-white mb-2'>Textilis for </h4>
+                        {/* <h1 className='text-white text-xl md:text-6xl  px-10 xl:px-28 pb-5 md:pb-10  font-bold'>"woven fabric” and that's exactly what it is.</h1> */}
+                        <button className='btn border-none text-white  bg-yellow-600 hover:bg-[#0d1637] px-10 text-xl'>Get Start</button>
+                    </div>
+                </div>
+            </SwiperSlide>
+        </Swiper >
     </div>
-
-    {/* <!-- Arrows --> */}
-    <button type="button" class="hs-carousel-prev hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 start-0 inline-flex justify-center items-center w-12 h-full text-black hover:bg-white/20 rounded-s-2xl focus:outline-none focus:bg-white/20">
-      <span class="text-2xl" aria-hidden="true">
-        <svg class="flex-shrink-0 size-3.5 md:size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z"></path>
-        </svg>
-      </span>
-      <span class="sr-only">Previous</span>
-    </button>
-
-    <button type="button" class="hs-carousel-next hs-carousel:disabled:opacity-50 disabled:pointer-events-none absolute inset-y-0 end-0 inline-flex justify-center items-center w-12 h-full text-black hover:bg-white/20 rounded-e-2xl focus:outline-none focus:bg-white/20">
-      <span class="sr-only">Next</span>
-      <span class="text-2xl" aria-hidden="true">
-        <svg class="flex-shrink-0 size-3.5 md:size-4" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"></path>
-        </svg>
-      </span>
-    </button>
-    {/* <!-- End Arrows --> */}
-  </div>
-</div>
-{/* <!-- End Slider --> */}
-        </div>
-    );
+);
 };
 
 export default Hero;

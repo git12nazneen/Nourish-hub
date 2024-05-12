@@ -5,6 +5,7 @@ import Swal from "sweetalert2";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
+import PostReview from "../room/PostReview";
 
 const MyRooms = () => {
   const { user } = useAuth();
@@ -21,8 +22,8 @@ const MyRooms = () => {
   };
   const handleUpdate = (bookingId) => {
     const updatedBooking = {
-      id: bookingId, // Include the _id of the booking
-      date: startDate, // Use the selected date
+      id: bookingId, 
+      date: startDate, 
     };
   
     fetch(`http://localhost:5000/booking/${bookingId}`, {
@@ -91,7 +92,7 @@ const MyRooms = () => {
 
   return (
     <div className="max-w-6xl mx-auto my-10">
-      <section className="container px-4 mx-auto pt-12">
+      <section className="container px-4 mx-auto py-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 ">
             My Booking rooms
@@ -262,6 +263,9 @@ const MyRooms = () => {
           </div>
         </div>
       </section>
+
+
+      <PostReview></PostReview>
     </div>
   );
 };

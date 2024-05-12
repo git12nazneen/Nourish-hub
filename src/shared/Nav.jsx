@@ -3,6 +3,7 @@ import { Link, NavLink } from 'react-router-dom';
 import swal from 'sweetalert';
 import useAuth from '../hooks/useAuth';
 import { Tooltip } from 'react-tooltip';
+import logo from '../assets/logo.png';
 
 const Nav = () => {
     const {  user,  logOut}= useAuth()
@@ -41,10 +42,10 @@ const Nav = () => {
     return (
         <div>
             <nav className="relative bg-white shadow dark:bg-gray-800">
-                <div className="container px-6 py-4 mx-auto md:flex md:justify-between md:items-center">
+                <div className="container px-6 mx-auto md:flex md:justify-between md:items-center">
                     <div className="flex items-center justify-between">
                         <a href="#">
-                            <img className="w-auto h-6 sm:h-7" src="https://merakiui.com/images/full-logo.svg" alt="" />
+                            <img className="w-auto h-24 " src={logo} alt="" />
                         </a>
                         {/* Mobile menu button */}
                         <div className="flex lg:hidden">

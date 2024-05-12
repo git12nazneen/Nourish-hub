@@ -12,6 +12,8 @@ import MyRooms from '../pages/myRooms/MyRooms';
 import Room from '../pages/room/Room';
 import About from '../pages/about/About';
 import RoomView from '../pages/room/RoomView';
+import Features from '../pages/home/Features';
+import SingleFeatures from '../pages/home/SingleFeatures';
 
   const router = createBrowserRouter([
     {
@@ -30,10 +32,18 @@ import RoomView from '../pages/room/RoomView';
             path:'/room',
             element:<Room></Room>,
             loader:()=>fetch('http://localhost:5000/room')
+        },{
+            path:'/features',
+            element:<Features></Features>,
+          
         },
         {
           path:'/room/:id',
           element:<RoomView></RoomView>,
+          loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
+        },{
+          path:'/room/:id',
+          element:<SingleFeatures></SingleFeatures>,
           loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
         },
         {
