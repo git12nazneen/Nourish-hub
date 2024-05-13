@@ -7,6 +7,7 @@ import swal from "sweetalert";
 import { getAuth } from "firebase/auth";
 import { app } from "../../firebase.config";
 import useAuth from "../hooks/useAuth";
+import Pagetitle from "../components/Pagetitle";
 
 
 const Register = () => {
@@ -84,6 +85,7 @@ const Register = () => {
     
   return (
     <div className="max-w-6xl mx-auto my-16">
+      <Pagetitle title='Register'></Pagetitle>
       <section className="bg-white dark:bg-gray-900">
         <div className="flex justify-center">
           <div
@@ -145,9 +147,9 @@ const Register = () => {
                   />
                    <span
                     className="absolute top-3 right-2"
-                    onClick={() => setShowpassword(!showPassword)}
+                    // onClick={() => setShowpassword(!showPassword)}
                   >
-                    {showPassword ? <IoEyeOutline /> : <FaRegEyeSlash />}
+                    {/* {showPassword ? <IoEyeOutline /> : <FaRegEyeSlash />} */}
                   </span>
                 </div>
 

@@ -6,6 +6,7 @@ import useAuth from "../../hooks/useAuth";
 import swal from "sweetalert";
 import { getAuth } from "firebase/auth";
 import { app } from "../../../firebase.config";
+import Pagetitle from "../../components/Pagetitle";
 
 
 const Login = () => {
@@ -56,10 +57,11 @@ const Login = () => {
 
   return (
     <div className="pattern">
+        <Pagetitle title='Login'></Pagetitle>
       <div className="flex flex-col items-center py-6 lg:h-[37rem] lg:flex-row mx-10">
         <div className="lg:w-1/2">
           <h2 className="text-3xl font-semibold text-gray-100 lg:text-4xl">
-            Brand
+           Nourish hub
           </h2>
 
           <h3 className="mt-2 text-2xl font-semibold text-gray-100">
@@ -67,9 +69,7 @@ const Login = () => {
           </h3>
 
           <p className="mt-4 text-gray-100">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Ipsam, eum
-            modi incidunt adipisci quod porro et non exercitationem quasi,
-            maxime culpa ut nemo ab delectus saepe iste nostrum explicabo a?
+          Welcome to our premier hotel booking service, where your comfort and satisfaction are our top priorities.Whether you're planning a business trip, a family vacation, or a romantic getaway, we offer a wide range of accommodations to suit every traveler's needs.
           </p>
         </div>
 

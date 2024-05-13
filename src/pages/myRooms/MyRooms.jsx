@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
 import useAuth from "../../hooks/useAuth";
 import Swal from "sweetalert2";
-
 import DatePicker from "react-datepicker";
-
 import "react-datepicker/dist/react-datepicker.css";
-import PostReview from "../room/PostReview";
+import { Link } from "react-router-dom";
+import Pagetitle from "../../components/Pagetitle";
 
 const MyRooms = () => {
   const { user } = useAuth();
@@ -92,6 +91,7 @@ const MyRooms = () => {
 
   return (
     <div className="max-w-6xl mx-auto my-10">
+        <Pagetitle title='My rooms'></Pagetitle>
       <section className="container px-4 mx-auto py-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 ">
@@ -138,6 +138,9 @@ const MyRooms = () => {
 
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Edit
+                      </th> 
+                      <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
+                        Give review
                       </th>
                     </tr>
                   </thead>
@@ -180,7 +183,7 @@ const MyRooms = () => {
                             <div className="relative flex justify-center">
                               <button
                                 onClick={openModal}
-                                className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-blue-600 rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
+                                className="px-6 py-2 mx-auto tracking-wide text-white capitalize transition-colors duration-300 transform bg-black rounded-md hover:bg-blue-500 focus:outline-none focus:ring focus:ring-blue-300 focus:ring-opacity-80"
                               >
                                 Update
                               </button>
@@ -254,6 +257,12 @@ const MyRooms = () => {
                             </div>
                           </div>
                         </td>
+                        <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
+                              <Link to='/review'>
+                              <button className="btn btn-warning">Review</button>
+                              </Link>
+
+                        </td>
                       </tr>
                     ))}
                   </tbody>
@@ -265,7 +274,7 @@ const MyRooms = () => {
       </section>
 
 
-      <PostReview></PostReview>
+      {/* <PostReview></PostReview> */}
     </div>
   );
 };

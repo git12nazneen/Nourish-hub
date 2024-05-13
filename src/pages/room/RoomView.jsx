@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 
 import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
+import Pagetitle from "../../components/Pagetitle";
 
 
 const RoomView = () => {
@@ -85,6 +86,7 @@ const RoomView = () => {
 
   return (
     <div>
+        <Pagetitle title='Room Details'></Pagetitle>
       <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-10 mx-auto">
           <div class="lg:flex lg:-mx-6">

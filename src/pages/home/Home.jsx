@@ -6,6 +6,7 @@ import Map from './Map';
 import Subscribe from './Subscribe';
 import Features from './Features';
 import UserReview from './UserReview';
+import Pagetitle from '../../components/Pagetitle';
 
 const Home = () => {
     const [modalIsOpen, setModalIsOpen] = useState(true);
@@ -21,6 +22,7 @@ const Home = () => {
     }, []);
     return (
         <div>
+            <Pagetitle title='Nourish Hub || home'></Pagetitle>
            <Hero></Hero>
            <Features></Features>
            <Subscribe></Subscribe>

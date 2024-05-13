@@ -14,6 +14,7 @@ import About from '../pages/about/About';
 import RoomView from '../pages/room/RoomView';
 import Features from '../pages/home/Features';
 import SingleFeatures from '../pages/home/SingleFeatures';
+import PostReview from '../pages/room/PostReview';
 
   const router = createBrowserRouter([
     {
@@ -35,7 +36,6 @@ import SingleFeatures from '../pages/home/SingleFeatures';
         },{
             path:'/features',
             element:<Features></Features>,
-          
         },
         {
           path:'/room/:id',
@@ -49,6 +49,10 @@ import SingleFeatures from '../pages/home/SingleFeatures';
         {
             path:'/myRoom',
             element:<MyRooms></MyRooms>
+        },,
+        {
+            path:'/review',
+            element:<PostReview></PostReview>
         },
         {
             path:'/login',

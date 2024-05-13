@@ -41,8 +41,8 @@ const Nav = () => {
 
     return (
         <div>
-            <nav className="relative bg-white shadow dark:bg-gray-800">
-                <div className="container px-6 mx-auto md:flex md:justify-between md:items-center">
+            <nav className="relative bg-gray-200 shadow dark:bg-gray-800">
+                <div className="container px-6 mx-auto md:flex md:justify-between md:items-center h-20">
                     <div className="flex items-center justify-between">
                         <a href="#">
                             <img className="w-auto h-24 " src={logo} alt="" />

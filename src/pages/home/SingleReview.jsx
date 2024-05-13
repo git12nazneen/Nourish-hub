@@ -7,7 +7,7 @@ const SingleReview = ({ singleReview }) => {
     <div>
       <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-10 mx-auto">
-          <div class="p-6 bg-gray-100 rounded-lg dark:bg-gray-800 md:p-8">
+          <div class="p-6 bg-gray-200 rounded-lg dark:bg-gray-800 md:p-8">
             <p class="leading-loose text-gray-500 dark:text-gray-300">
               {comment}
             </p>

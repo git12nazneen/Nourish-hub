@@ -1,7 +1,8 @@
 import { useLoaderData } from "react-router-dom";
 import SingleRoom from "./SingleRoom";
 import { useState } from "react";
-import PostReview from "./PostReview";
+import Pagetitle from "../../components/Pagetitle";
+
 
 const Room = () => {
   const room = useLoaderData();
@@ -44,6 +45,7 @@ const Room = () => {
         </header>
       </div>
       <div className=" max-w-6xl mx-auto  my-10">
+      <Pagetitle title='Rooms'></Pagetitle>
         <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3  mx-auto">
           {room.map((singleRoom) => (
             <SingleRoom
@@ -54,7 +56,7 @@ const Room = () => {
         </div>
       </div>
 
-      <PostReview></PostReview>
+      {/* <PostReview></PostReview> */}
     </div>
   );
 };
