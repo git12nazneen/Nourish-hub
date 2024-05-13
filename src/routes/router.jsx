@@ -15,6 +15,7 @@ import RoomView from '../pages/room/RoomView';
 import Features from '../pages/home/Features';
 import SingleFeatures from '../pages/home/SingleFeatures';
 import PostReview from '../pages/room/PostReview';
+import Privateroute from './Privateroute';
 
   const router = createBrowserRouter([
     {
@@ -39,7 +40,7 @@ import PostReview from '../pages/room/PostReview';
         },
         {
           path:'/room/:id',
-          element:<RoomView></RoomView>,
+          element:<Privateroute><RoomView></RoomView></Privateroute>,
           loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
         },{
           path:'/room/:id',
@@ -48,7 +49,7 @@ import PostReview from '../pages/room/PostReview';
         },
         {
             path:'/myRoom',
-            element:<MyRooms></MyRooms>
+            element:<Privateroute><MyRooms></MyRooms></Privateroute>
         },,
         {
             path:'/review',
