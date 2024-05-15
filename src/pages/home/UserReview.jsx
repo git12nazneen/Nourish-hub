@@ -23,9 +23,7 @@ const UserReview = () => {
         </h1>
 
         <p  data-aos="fade-left" data-aos-delay="1200" class="max-w-2xl mx-auto mt-6 text-center text-gray-500 dark:text-gray-300">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo incidunt
-          ex placeat modi magni quia error alias, adipisci rem similique, at
-          omnis eligendi optio eos harum.
+        Briefly describe the project you worked on for the client. Include any challenges you encountered and how you overcame them. Highlight specific achievements or successes.Add any final thoughts or comments you have about the client or the project
         </p>
       </div>
 
