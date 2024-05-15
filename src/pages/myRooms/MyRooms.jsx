@@ -5,6 +5,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { Link } from "react-router-dom";
 import Pagetitle from "../../components/Pagetitle";
+import swal from "sweetalert";
 
 const MyRooms = () => {
   const { user } = useAuth();
@@ -19,17 +20,19 @@ const MyRooms = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
+
   const handleUpdate = (bookingId) => {
     const updatedBooking = {
-      id: bookingId, 
-      date: startDate, 
+      id: bookingId,
+      date: startDate,
     };
-  
-    fetch(`http://localhost:5000/booking/${bookingId}`, {
+
+    fetch(`https://server-site-one-xi.vercel.app/booking/${bookingId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(updatedBooking),
     })
       .then((res) => res.json())
@@ -37,61 +40,93 @@ const MyRooms = () => {
         console.log(data);
         if (data.success) {
           Swal.fire({
-            icon: 'success',
-            title: 'Update Successful',
-            text: 'Booking date updated successfully.',
+            icon: "success",
+            title: "Update Successful",
+            text: "Booking date updated successfully.",
           });
+          window.location.reload()
           closeModal();
         }
       })
       .catch((error) => {
         console.error("Error updating booking date:", error);
-       
       });
   };
-  
 
   useEffect(() => {
-    fetch(`http://localhost:5000/booking/${user?.email}`)
+    fetch(`https://server-site-one-xi.vercel.app/booking/${user?.email}`, {
+      credentials: "include",
+    })
       .then((res) => res.json())
       .then((data) => setBooking(data));
   }, [user]);
   console.log(booking);
 
-  const handleDelete = (_id) => {
-    Swal.fire({
-      title: "Are you sure?",
-      text: "You won't be able to revert this!",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, delete it!",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        fetch(`http://localhost:5000/booking/${_id}`, {
-          method: "DELETE",
-        })
-          .then((res) => res.json())
-          .then((data) => {
-            if (data.deletedCount > 0) {
-              setBooking((prevBookings) =>
-                prevBookings.filter((booking) => booking._id !== _id)
-              );
-              Swal.fire({
-                title: "Deleted!",
-                text: "Your cart has been deleted.",
-                icon: "success",
-              });
-            }
-          });
-      }
-    });
+  const handleDelete = (_id, roomid, date) => {
+    console.log(_id, date);
+    const time = new Date(date).getTime()
+    const curTime = new Date().getTime()
+    if(curTime < time - 8600000){
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          fetch(`https://server-site-one-xi.vercel.app/booking/${_id}`, {
+            method: "DELETE",
+            // 1 
+            headers: {
+              "content-type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify()
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              if (data.deletedCount > 0) {
+                fetch(`https://server-site-one-xi.vercel.app/room/${roomid}`, {
+                  method: "PUT",
+                  headers: {
+                    "content-type": "application/json",
+                  },
+                  credentials: "include",
+                  body: JSON.stringify({ isAvailable: "available" }),
+                })
+                  .then((res) => res.json())
+                  .then((data) => console.log(data));
+  
+                setBooking((prevBookings) =>
+                  prevBookings.filter((booking) => booking._id !== _id)
+                );
+  
+                Swal.fire({
+                  title: "Deleted!",
+                  text: "Your cart has been deleted.",
+                  icon: "success",
+                });
+              }
+            });
+        }
+      });
+    }
+    else{
+      Swal.fire({
+        text: "You cant delete!",
+        icon: "warning",
+      })
+    }
+  
   };
+
 
   return (
     <div className="max-w-6xl mx-auto my-10">
-        <Pagetitle title='My rooms'></Pagetitle>
+      <Pagetitle title="My rooms"></Pagetitle>
       <section className="container px-4 mx-auto py-12">
         <div className="flex items-center gap-x-3">
           <h2 className="text-lg font-medium text-gray-800 ">
@@ -138,7 +173,7 @@ const MyRooms = () => {
 
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Edit
-                      </th> 
+                      </th>
                       <th className="px-4 py-3.5 text-sm font-normal text-left rtl:text-right text-gray-500">
                         Give review
                       </th>
@@ -162,7 +197,9 @@ const MyRooms = () => {
                         <td className="px-4 py-4 text-sm whitespace-nowrap">
                           <div className="flex items-center gap-x-6">
                             <button
-                              onClick={() => handleDelete(books._id)}
+                              onClick={() =>
+                                handleDelete(books._id, books.roomid, books.date)
+                              }
                               className="text-gray-500 transition-colors duration-200   hover:text-red-500 focus:outline-none"
                             >
                               <svg
@@ -218,7 +255,9 @@ const MyRooms = () => {
                                               onChange={(date) =>
                                                 setStartDate(date)
                                               }
-                                              defaultValue=   {new Date(books.date).toLocaleDateString()} 
+                                              defaultValue={new Date(
+                                                books.date
+                                              ).toLocaleDateString()}
                                             />
                                           </div>
                                         </div>
@@ -258,10 +297,9 @@ const MyRooms = () => {
                           </div>
                         </td>
                         <td className="px-4 py-4 text-sm text-gray-500  whitespace-nowrap">
-                              <Link to='/review'>
-                              <button className="btn btn-warning">Review</button>
-                              </Link>
-
+                          <Link to={`/review/${books.roomid}`}>
+                            <button className="btn btn-warning">Review</button>
+                          </Link>
                         </td>
                       </tr>
                     ))}
@@ -272,7 +310,6 @@ const MyRooms = () => {
           </div>
         </div>
       </section>
-
 
       {/* <PostReview></PostReview> */}
     </div>

@@ -7,21 +7,17 @@ import "react-datepicker/dist/react-datepicker.css";
 import swal from "sweetalert";
 import Pagetitle from "../../components/Pagetitle";
 
-
 const RoomView = () => {
   const { user, logOut } = useAuth();
   const [startDate, setStartDate] = useState(new Date());
   const [isOpen, setIsOpen] = useState(false);
-  const [isRoomAvailable, setIsRoomAvailable] = useState(true); 
+  const [isRoomAvailable, setIsRoomAvailable] = useState(true);
+  const [reviews, setReviews] = useState([]);
   const isAuthenticated = !!user;
 
   useEffect(() => {
-  
     setIsRoomAvailable(true);
-  }, [user]); 
-
-
-
+  }, [user]);
 
   const openModal = () => {
     setIsOpen(true);
@@ -35,6 +31,7 @@ const RoomView = () => {
   const roomView = useLoaderData();
 
   const {
+    _id,
     hotel_name,
     room_description,
     room_images,
@@ -46,9 +43,10 @@ const RoomView = () => {
     total_reviews,
     country,
   } = roomView;
-
+console.log(roomView)
   const handleConfirmBooking = () => {
     // e.preventDefault()
+    const roomid = _id;
     const email = user?.email;
     console.log(email);
     console.log("Hotel Name:", hotel_name);
@@ -57,10 +55,10 @@ const RoomView = () => {
     const hotel = hotel_name;
     const price = price_per_night;
     const date = startDate;
-    const info = { hotel, price, date, email };
+    const info = { hotel, price, date, email, roomid };
     console.log(info);
 
-    fetch("http://localhost:5000/booking", {
+    fetch("https://server-site-one-xi.vercel.app/booking", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -71,10 +69,21 @@ const RoomView = () => {
       .then((res) => res.json())
       .then((data) => {
         console.log("getting data", data);
+
+        fetch(`https://server-site-one-xi.vercel.app/room/${_id}`, {
+          method: "PUT",
+          headers: {
+            "content-type": "application/json",
+          },
+          credentials: "include",
+          body: JSON.stringify({ isAvailable: "unavailable" }),
+        })
+          .then((res) => res.json())
+          .then((data) => console.log(data));
         if (data.insertedId) {
-         
           swal("Done", "Success booking room ", "success");
           closeModal();
+          window.location.reload();
           setIsRoomAvailable(false);
         }
       })
@@ -83,10 +92,21 @@ const RoomView = () => {
       });
   };
 
+  // useEffect(() => {
+  //   fetch(`https://server-site-one-xi.vercel.app/room/${_id}/review`)
+  //     .then(res => res.json())
+  //     .then(data => {
+  //       console.log(data);
+  //       setReviews(data);
+  //     })
+  //     .catch(error => {
+  //       console.error(error);
+  //     });
+  // }, []);
 
   return (
     <div>
-        <Pagetitle title='Room Details'></Pagetitle>
+      <Pagetitle title="Room Details"></Pagetitle>
       <section class="bg-white dark:bg-gray-900">
         <div class="container px-6 py-10 mx-auto">
           <div class="lg:flex lg:-mx-6">
@@ -100,7 +120,8 @@ const RoomView = () => {
                   class="block font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400"
                 >
                   <span className="px-3 py-1 text-xl font-light text-black bg-yellow-600 rounded-full">
-                  {isRoomAvailable ? "Available" : "Unavailable"}
+                    {/* {isRoomAvailable ? "Available" : "Unavailable"} */}
+                    {availability == "available" ? "Available" : "Unavailable"}
                   </span>
                 </a>
               </div>
@@ -115,7 +136,23 @@ const RoomView = () => {
                 <p>Special Offers:{special_offers}</p>
 
                 <div className="relative flex justify-start">
-                  <button
+                  {availability == "available" ? (
+                    <button
+                      onClick={openModal}
+                      className="btn  btn-outline btn-warning my-2"
+                    >
+                      Confirm book
+                    </button>
+                  ) : (
+                    <button
+                      onClick={openModal}
+                      className="btn  btn-outline btn-warning my-2"
+                      disabled
+                    >
+                      Confirm book
+                    </button>
+                  )}
+                  {/* <button
                     onClick={openModal}
                     className="btn  btn-outline btn-warning my-2"
                     // disabled={!isRoomAvailable} 
@@ -123,7 +160,7 @@ const RoomView = () => {
           
                   >
                     Confirm book
-                  </button>
+                  </button> */}
 
                   {isOpen && (
                     <div
@@ -258,13 +295,77 @@ const RoomView = () => {
 
                 <a
                   href="#"
-                  class="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 "
+                  class="block mt-2 font-medium text-gray-700 hover:underline hover:text-gray-500 dark:text-gray-400 bg-yellow-600 px-5 py-2 rounded-xl "
                 >
-                  Total reviews:{total_reviews}
+                  Total reviews:
+                  {total_reviews.length > 0
+                    ? total_reviews.length
+                    : "Not available "}
                 </a>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section>
+        <div className="max-w-6xl mx-auto mb-7">
+          {total_reviews.length > 0 ? (
+            <table className="min-w-full divide-y divide-gray-200 border border-gray-300">
+              <thead className="bg-yellow-200">
+                <tr>
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Person Name
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Rating
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Opinion
+                  </th>
+                  <th
+                    scope="col"
+                    className="px-4 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
+                  >
+                    Date
+                  </th>
+                </tr>
+              </thead>
+              <tbody className="bg-white divide-y divide-gray-200">
+                {total_reviews.map((rev) => (
+                  <tr key={rev._id}>
+                    <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap border border-gray-300">
+                      Person name: {rev.review.name}
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap border border-gray-300">
+                      Person rating: {rev.review.rating}
+                    </td>
+                    <td className="px-4 py-4 text-sm text-gray-500 whitespace-nowrap border border-gray-300">
+                      Person's opinion: {rev.review.comment}
+                    </td>
+                    <td className="px-4 py-4 text-sm whitespace-nowrap border border-gray-300">
+                      <div className="flex items-center gap-x-6">
+                        <div className="relative flex justify-center">
+                          {new Date(rev.review.startDate).toLocaleDateString()}
+                        </div>
+                      </div>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          ) : (
+            <div className=" font-bold text-2xl text-yellow-600 py-5">Not available reviews</div>
+          )}
         </div>
       </section>
     </div>
@@ -272,84 +373,3 @@ const RoomView = () => {
 };
 
 export default RoomView;
-
-
-// import React, { useEffect, useState } from "react";
-// import { useLoaderData } from "react-router-dom";
-// import DatePicker from "react-datepicker";
-// import useAuth from "../../hooks/useAuth";
-// import swal from "sweetalert";
-
-// import "react-datepicker/dist/react-datepicker.css";
-
-// const RoomView = () => {
-//   const { user, logOut } = useAuth(); // Assuming you have a logout function in useAuth hook
-//   const [startDate, setStartDate] = useState(new Date());
-//   const [isOpen, setIsOpen] = useState(false);
-//   const [isRoomAvailable, setIsRoomAvailable] = useState(true);
-//   const isAuthenticated = !!user; // Check if user is authenticated
-
-//   useEffect(() => {
-//     setIsRoomAvailable(true);
-//   }, [user]);
-
-//   const openModal = () => {
-//     setIsOpen(true);
-//   };
-
-//   const closeModal = () => {
-//     setIsOpen(false);
-//   };
-
-//   const handleConfirmBooking = () => {
-//     const email = user?.email;
-//     const hotel = hotel_name;
-//     const price = price_per_night;
-//     const date = startDate;
-//     const info = { hotel, price, date, email };
-
-//     fetch("http://localhost:5000/booking", {
-//       method: "POST",
-//       headers: {
-//         "content-type": "application/json",
-//       },
-//       credentials: "include",
-//       body: JSON.stringify(info),
-//     })
-//       .then((res) => res.json())
-//       .then((data) => {
-//         if (data.insertedId) {
-//           swal("Done", "Success booking room ", "success");
-//           closeModal();
-//           setIsRoomAvailable(false);
-//         }
-//       })
-//       .catch((error) => {
-//         console.error(error);
-//       });
-//   };
-
-//   return (
-//     <div>
-//       <section class="bg-white dark:bg-gray-900">
-//         <div class="container px-6 py-10 mx-auto">
-//           <div class="lg:flex lg:-mx-6">
-//             <div class="lg:w-3/4 lg:px-6 relative">
-//               {/* Your existing code */}
-//               <button
-//                 onClick={openModal}
-//                 className="btn btn-outline btn-warning my-2"
-//                 disabled={!isRoomAvailable || !isAuthenticated} // Disable booking button if room is unavailable or user is not authenticated
-//               >
-//                 Confirm book
-//               </button>
-//               {/* Your existing code */}
-//             </div>
-//           </div>
-//         </div>
-//       </section>
-//     </div>
-//   );
-// };
-
-// export default RoomView;

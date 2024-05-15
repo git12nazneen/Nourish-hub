@@ -10,7 +10,7 @@ const UserReview = () => {
   const [review, setReview] = useState([]);
 
   useEffect(() => {
-    fetch("http://localhost:5000/review")
+    fetch("https://server-site-one-xi.vercel.app/review")
       .then((res) => res.json())
       .then((data) => setReview(data));
   }, []);
@@ -41,6 +41,17 @@ const UserReview = () => {
           disableOnInteraction: false,
         }}
         modules={[Autoplay,  Navigation]}
+        breakpoints={{
+          350: {
+            slidesPerView: 1,
+          },
+          768: {
+            slidesPerView: 2,
+          },
+          1024: {
+            slidesPerView: 3,
+          },
+        }}
       >
         {review.map((singleReview) => (
           <SwiperSlide key={singleReview._id}>

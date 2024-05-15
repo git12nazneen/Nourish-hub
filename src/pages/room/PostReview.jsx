@@ -4,11 +4,14 @@ import Timestamp from "react-timestamp";
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import Swal from "sweetalert2";
+import { useLocation, useParams } from "react-router-dom";
 
 const PostReview = () => {
   const { user } = useAuth();
   const [timestamp, setTimestamp] = useState(0);
   const [startDate, setStartDate] = useState(new Date());
+  const { id } = useParams();
+  console.log(id);
 
   // const handleInputChange = (event) => {
   //   const value = parseInt(event.target.value);
@@ -20,23 +23,36 @@ const PostReview = () => {
     const form = e.target;
     const name = user?.displayName;
     const rating = form.rating.value;
-
+    // const roomId = id;
     const comment = form.comment.value;
     const date = startDate;
     const review = { name, rating, comment, startDate };
     console.log(review);
 
-    fetch("http://localhost:5000/review", {
+    fetch("https://server-site-one-xi.vercel.app/review", {
       method: "POST",
       headers: {
         "content-type": "application/json",
       },
+      credentials: "include",
       body: JSON.stringify(review),
     })
       .then((res) => res.json())
       .then((data) => {
         console.log(data);
         if (data.insertedId) {
+          fetch(`https://server-site-one-xi.vercel.app/rooms/${id}`, {
+            method: "PUT",
+            headers: {
+              "content-type": "application/json",
+            },
+            credentials: "include",
+            body: JSON.stringify({review}),
+          })
+            .then((res) => res.json())
+            .then((data) => {
+              console.log(data);
+            });
           Swal.fire({
             title: "Success",
             text: "Your cart has been added.",
@@ -44,7 +60,7 @@ const PostReview = () => {
           });
         }
       });
-  };
+   };
 
   return (
     <div>
@@ -127,6 +143,7 @@ const PostReview = () => {
                       />
                     </div>
                   </div>
+                 
                 </div>
 
                 <div class="flex justify-end mt-6">

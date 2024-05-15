@@ -1,6 +1,8 @@
 import React from 'react';
+import { useLoaderData } from 'react-router-dom';
 
 const Review = () => {
+    
     return (
         <div>
       <section class=" bg-gray-900">

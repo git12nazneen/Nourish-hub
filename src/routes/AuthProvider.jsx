@@ -2,6 +2,7 @@ import { createContext, useEffect, useState } from "react";
 import { GithubAuthProvider, GoogleAuthProvider, createUserWithEmailAndPassword, getAuth, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 import { app } from "../../firebase.config";
+import axios from "axios";
 export const AuthContext = createContext(null)
 const auth = getAuth(app)
 
@@ -62,9 +63,23 @@ const AuthProvider = ({children}) => {
     // observer
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth, createUser =>{
-            console.log('User ib auth state', createUser)
+            const userEmail = createUser?.email || user?.email;
+            const loggedUser = {email: userEmail};
             setUser(createUser)
+            console.log('User ib auth state', createUser)
             setLoading(false)
+            // if user exists then issue a token
+            if(createUser){
+                axios.post( 'https://server-site-one-xi.vercel.app/jwt' ,loggedUser, {withCredentials: true})
+                .then(res=>{
+                    console.log('token response',res.data)
+                })
+            }else{
+                axios.post('https://server-site-one-xi.vercel.app/logout', loggedUser, {
+                    withCredentials: true
+                })
+                .then(res=> console.log(res.data))
+            }
         })
         return()=>{
             unSubscribe();

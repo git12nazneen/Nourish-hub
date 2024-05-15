@@ -4,17 +4,18 @@ import { useLoaderData } from "react-router-dom";
 import SingleRoom from "./SingleRoom";
 import { useState, useEffect } from "react";
 import Pagetitle from "../../components/Pagetitle";
+import PostReview from "./PostReview";
 
 const Room = () => {
   const room = useLoaderData();
-  
+  console.log(room)
   const [selectedPrice, setSelectedPrice] = useState("");
   const [filterRooms, setFilterRooms] = useState([]);
 
   useEffect(() => {
     const fetchFilteredRooms = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/rooms-filter?maxPrice=${selectedPrice}`);
+        const response = await fetch(`https://server-site-one-xi.vercel.app/rooms-filter?maxPrice=${selectedPrice}`);
         const data = await response.json();
         setFilterRooms(data);
       } catch (error) {
@@ -71,6 +72,7 @@ const Room = () => {
               <SingleRoom
                 key={singleRoom._id}
                 singleRoom={singleRoom}
+              
               ></SingleRoom>
             ))
           ) : (

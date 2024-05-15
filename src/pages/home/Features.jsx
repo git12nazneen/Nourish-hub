@@ -8,7 +8,7 @@ const Features = () => {
     const [subCard, setSubCard] = useState()
     // const subcategory = useLoaderData();
     useEffect(()=>{
-      fetch("http://localhost:5000/room")
+      fetch("https://server-site-one-xi.vercel.app/room")
       .then(res => res.json())
       .then(data=>{
        setSubCard(data)

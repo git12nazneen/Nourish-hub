@@ -7,10 +7,13 @@ import swal from "sweetalert";
 import { getAuth } from "firebase/auth";
 import { app } from "../../../firebase.config";
 import Pagetitle from "../../components/Pagetitle";
+import axios from "axios";
+
 
 
 const Login = () => {
- const {googleLogin, signIn,}= useAuth()
+
+ const {googleLogin, signIn}= useAuth()
  const auth = getAuth(app);
  const location = useLocation();
  const navigate = useNavigate();
@@ -25,11 +28,27 @@ const Login = () => {
   const onSubmit = (data) => {
     const{email, password} = data;
     console.log(data)
+    // 1
+    const user = {email}
+    
+
     signIn(email, password)
-    .then(result=>{
-      swal({text:'success login',  icon: "success",})
-      console.log(result.user)
+  // 1
+  axios.post( 'https://server-site-one-xi.vercel.app/jwt' ,user, {withCredentials: true})
+    .then(res=>{
+        if(res.data.success){
+          swal({text:'success login',  icon: "success",})
+            console.log(res.user)
+            navigate(location?.state ? location.state : "/");
+        }
+        // console.log('token response',res.data)
     })
+
+
+    // .then(result=>{
+    //   swal({text:'success login',  icon: "success",})
+    //   console.log(result.user)
+    // })
     .catch((error)=>{
       swal({text:'error ', icon:'error'})
       console.error(error)
@@ -39,15 +58,48 @@ const Login = () => {
 
   const handleSocialLogin = (socialProvider)=>{
     socialProvider()
+
+    // 1 
     .then((result) => {
       if (result.user) {
-        swal({
-          text: "Success fully login",
-          icon: "success",
-        });
-        navigate(location?.state ? location.state : "/");
-      }
-    })
+        // Social authentication successful
+        const user = { email: result.user.email };
+
+        // Make the axios post request
+        axios
+          .post("https://server-site-one-xi.vercel.app/jwt", user, { withCredentials: true })
+          .then((res) => {
+            if (res.data.success) {
+              swal({ text: "Success login", icon: "success" });
+              console.log(res.user);
+              navigate(location?.state ? location.state : "/");
+            }
+          })
+          .catch((error) => {
+            swal({ text: "Error", icon: "error" });
+            console.error(error);
+          });
+        }
+      })
+    // axios.post( 'https://server-site-one-xi.vercel.app/jwt' ,user, {withCredentials: true})
+    // .then(res=>{
+    //     if(res.data.success){
+    //       swal({text:'success login',  icon: "success",})
+    //         console.log(res.user)
+    //         navigate(location?.state ? location.state : "/");
+    //     }
+    //     // console.log('token response',res.data)
+    // })
+
+    // .then((result) => {
+    //   if (result.user) {
+    //     swal({
+    //       text: "Success fully login",
+    //       icon: "success",
+    //     });
+    //     navigate(location?.state ? location.state : "/");
+    //   }
+    // })
     .catch((error) => {
       swal ( "Oops" ,  "Something went wrong!" ,  "error" )
       console.error(error);

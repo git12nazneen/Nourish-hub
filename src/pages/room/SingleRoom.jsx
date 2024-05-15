@@ -26,7 +26,7 @@ const SingleRoom = ({ singleRoom }) => {
           </p>
           <div className="flex my-3">
             <div className="flex-1"><p className="text-gray-800 dark:text-white"> Price:{price_per_night} $</p> </div>
-            <div className="flex-1"><p className="text-gray-800 dark:text-white">Total view: {total_reviews}</p></div>
+            <div className="flex-1"><p className="text-gray-800 dark:text-white">Total view: {total_reviews.length > 0 ? total_reviews.length : "Not available "}</p></div>
           </div>
         </div>
       </a>

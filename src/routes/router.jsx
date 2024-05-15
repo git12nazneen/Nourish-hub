@@ -33,7 +33,7 @@ import Privateroute from './Privateroute';
         },{
             path:'/room',
             element:<Room></Room>,
-            loader:()=>fetch('http://localhost:5000/room')
+            loader:()=>fetch('https://server-site-one-xi.vercel.app/room')
         },{
             path:'/features',
             element:<Features></Features>,
@@ -41,19 +41,28 @@ import Privateroute from './Privateroute';
         {
           path:'/room/:id',
           element:<Privateroute><RoomView></RoomView></Privateroute>,
-          loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
+          loader:({params})=>fetch(`https://server-site-one-xi.vercel.app/room/${params.id}`,{
+            credentials: "include",
+          })
         },{
           path:'/room/:id',
+          // element:<SingleFeatures></SingleFeatures>, 1
           element:<SingleFeatures></SingleFeatures>,
-          loader:({params})=>fetch(`http://localhost:5000/room/${params.id}`)
+          loader:({params})=>fetch(`https://server-site-one-xi.vercel.app/room/${params.id}`,
+            {
+              credentials: "include",
+            }
+          )
         },
         {
             path:'/myRoom',
             element:<Privateroute><MyRooms></MyRooms></Privateroute>
-        },,
+        },
         {
-            path:'/review',
-            element:<PostReview></PostReview>
+            path:'/review/:id',
+            // element:<PostReview></PostReview> 1
+            element:<Privateroute><PostReview></PostReview> </Privateroute>
+     
         },
         {
             path:'/login',
