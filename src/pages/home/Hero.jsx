@@ -13,7 +13,7 @@ import banner3 from '../../assets/ban4.jpg'
 
 const Hero = () => {
   return (
-    <div>
+    <div className='overflow-x-hidden'>
       
         <Swiper
             spaceBetween={30}

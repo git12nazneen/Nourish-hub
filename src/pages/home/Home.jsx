@@ -7,6 +7,7 @@ import Subscribe from "./Subscribe";
 import Features from "./Features";
 import UserReview from "./UserReview";
 import Pagetitle from "../../components/Pagetitle";
+import img from '../../assets/dis.png'
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -45,12 +46,12 @@ const Home = () => {
                 &times;
               </button>
               <h3 className="modal-title text-2xl font-bold text-yellow-600 ">
-                Hello!
+                Special Offers for you
               </h3>
-              <h2>There are many other special offer for you</h2>
-              <h3>Every room booking has 30% off.</h3>
-              <h4>Please explore full website</h4>
-              <h4>And See our details</h4>
+             
+              <img className="h-48 w-auto mx-auto" src={img} alt="" />
+             
+              <h4> See our details</h4>
               <p className="modal-text font-bold ">
                 Press ESC key or click on &times; button to close
               </p>
