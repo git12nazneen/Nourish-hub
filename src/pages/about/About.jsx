@@ -2,20 +2,23 @@ import React from "react";
 import banner5 from "../../assets/ban5.jpg";
 import banner6 from "../../assets/ban6.jpg";
 import Pagetitle from "../../components/Pagetitle";
+import AboutHead from "../../components/AboutHead";
+
 
 const About = () => {
   return (
     <div className=" bg-gray-100">
       <Pagetitle title="About us"></Pagetitle>
+    <AboutHead></AboutHead>
       <div className="min-h-screen max-w-6xl mx-auto text-gray-800">
         <div className="p-6 space-y-8">
           <main>
             <div className="container mx-auto space-y-16">
               <section>
-                <span className="block mb-2 text-xs font-medium tracking-widest uppercase lg:text-center dark:text-violet-600">
+                <span className="block mb-2 text-sm lg:text-3xl font-medium tracking-widest uppercase lg:text-center dark:text-violet-600">
                 Welcome to Nourish hub   
                 </span>
-                <h2 className="text-5xl font-bold lg:text-center dark:text-gray-900">
+                <h2 className="text-xl font-bold lg:text-center dark:text-gray-900">
                 Your gateway to hassle-free hotel reservations.
                 </h2>
                 <div className="grid gap-6 my-16 lg:grid-cols-3">
@@ -71,7 +74,7 @@ const About = () => {
               </section>
               <section>
                 <div className="container p-6 py-20 mx-auto rounded lg:px-8 dark:bg-gray-50">
-                  <h2 className="text-5xl font-bold text-center">
+                  <h2 className="lg:text-5xl text-sm font-bold text-center">
                     Our team is here to help you.
                   </h2>
                   <div className="flex justify-center p-4">

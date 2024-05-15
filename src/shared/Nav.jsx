@@ -109,7 +109,7 @@ const Nav = () => {
             </div>
               ) : (
                 <Link to="/login">
-                <a className="btn btn-outline">Login</a>
+                <a className="px-7 py-3 bg-black rounded-2xl text-white hover:bg-yellow-600 hover:text-black">Login</a>
               </Link>
               )
             }

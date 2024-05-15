@@ -5,6 +5,7 @@ import SingleRoom from "./SingleRoom";
 import { useState, useEffect } from "react";
 import Pagetitle from "../../components/Pagetitle";
 import PostReview from "./PostReview";
+import MyroomHead from "../../components/MyroomHead";
 
 const Room = () => {
   const room = useLoaderData();
@@ -39,11 +40,12 @@ const Room = () => {
   console.log(selectedPrice)
   return (
     <div>
+       <MyroomHead></MyroomHead>
       <div className="max-w-6xl mx-auto">
         <header className="p-4 dark:bg-gray-100 dark:text-gray-800">
           <div className="container flex justify-between h-16 mx-auto">
             <div className="text-right">
-              <h1 className="mt-5 font-bold text-3xl text-yellow-600">
+              <h1 className="mt-5 font-bold text-sm lg:text-3xl text-yellow-600">
                 Hungary Best hotel rooms.
               </h1>
             </div>
@@ -64,7 +66,7 @@ const Room = () => {
           </div>
         </header>
       </div>
-      <div className="max-w-6xl mx-auto my-10">
+      <div className="max-w-6xl mx-auto my-10 ">
         <Pagetitle title="Rooms"></Pagetitle>
         <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3 mx-auto">
           {filterRooms.length > 0 ? (

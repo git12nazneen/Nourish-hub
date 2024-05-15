@@ -4,8 +4,8 @@ import { Link } from "react-router-dom";
 const SingleRoom = ({ singleRoom }) => {
   const {city,total_reviews,price_per_night,room_images,hotel_name, _id} = singleRoom;
   return (
-    <div>
-      <a
+    <div className="mx-5 lg:mx-0 overflow-x-hidden">
+      <a data-aos="zoom-in-down" data-aos-duration="2000"
         class="flex flex-col group bg-white border shadow-sm rounded-xl overflow-hidden hover:shadow-lg transition dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
         href="#"
       >

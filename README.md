@@ -1,5 +1,4 @@
 
-
 ## Nourish Hub: Your Premier Hotel Booking Platform in Hungary
 
 Welcome to Nourish Hub, your ultimate destination for hotel room bookings in Hungary. Whether you're planning a business trip, a family vacation, or a romantic getaway, Nourish Hub offers a seamless booking experience to ensure your stay is memorable and hassle-free.
@@ -59,7 +58,7 @@ Ability to update booking dates.
 
 ## Demo
 
-Check out the live demo of Nourish hub [here]().
+Check out the live demo of Nourish hub [here](https://nourish-hub-efad9.web.app/).
 
 ## Installation:
 

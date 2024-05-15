@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 const SingleFeatures = ({singleFeatures}) => {
     const {city,total_reviews,price_per_night,room_images,hotel_name,room_description, _id} = singleFeatures;
   return (
-    <div>
+    <div data-aos="zoom-in-down" data-aos-duration="2000" className="overflow-x-hidden">
       <a
         class="flex flex-col bg-white border shadow-sm rounded-xl hover:shadow-lg transition dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-neutral-700/70"
         href="#"

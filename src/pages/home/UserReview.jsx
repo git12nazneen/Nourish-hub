@@ -17,12 +17,12 @@ const UserReview = () => {
 
   return (
     <div className="my-10">
-      <div>
-        <h1 class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
+      <div className="overflow-x-hidden">
+        <h1 data-aos="fade-left" data-aos-delay="1000" class="text-2xl font-semibold text-center text-gray-800 capitalize lg:text-3xl dark:text-white">
           What our <span class="text-yellow-400 ">clients</span> say
         </h1>
 
-        <p class="max-w-2xl mx-auto mt-6 text-center text-gray-500 dark:text-gray-300">
+        <p  data-aos="fade-left" data-aos-delay="1200" class="max-w-2xl mx-auto mt-6 text-center text-gray-500 dark:text-gray-300">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo incidunt
           ex placeat modi magni quia error alias, adipisci rem similique, at
           omnis eligendi optio eos harum.
