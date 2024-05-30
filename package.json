@@ -27,9 +27,9 @@
     "react-router-dom": "^6.23.0",
     "react-timestamp": "^6.0.0",
     "react-tooltip": "^5.26.4",
-    "sort-by": "^1.2.0",
+    "sort-by": "^0.0.2",
     "sweetalert": "^2.1.2",
-    "sweetalert2": "^11.11.0",
+    "sweetalert2": "^11.6.13",
     "swiper": "^11.1.1"
   },
   "devDependencies": {

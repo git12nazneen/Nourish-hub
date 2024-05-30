@@ -116,7 +116,7 @@ const MyRooms = () => {
     }
     else{
       Swal.fire({
-        text: "You cant delete!",
+        text: "You cant delete! Update the date 2 or 3days.",
         icon: "warning",
       })
     }

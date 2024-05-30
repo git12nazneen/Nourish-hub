@@ -26,71 +26,55 @@ const Nav = () => {
 
   const navLinks = (
     <>
-      <li>
-        <NavLink to="/">
-          {" "}
-          <a
-            className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
-            href="#"
-          >
-            Home
-          </a>
-        </NavLink>
-      </li>
+      <NavLink 
+        to="/" 
+        className={({ isActive }) =>
+          isActive ? 'text-yellow-600 border-b-2 border-yellow-600 font-bold' : 'my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
+        }
+      >
+        Home
+      </NavLink>
 
-      <li>
-        <NavLink to="/room">
-          {" "}
-          <a
-            className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
-            href="#"
-          >
-            Rooms
-          </a>
-        </NavLink>
-      </li>
+      <NavLink 
+        to="/room" 
+        className={({ isActive }) =>
+          isActive ? 'text-yellow-600 border-b-2 border-yellow-600 font-bold' : 'my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
+        }
+      >
+        Rooms
+      </NavLink>
 
-      <li>
-        <NavLink to="/about">
-          {" "}
-          <a
-            className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
-            href="#"
-          >
-            About us
-          </a>
-        </NavLink>
-      </li>
+      <NavLink 
+        to="/about" 
+        className={({ isActive }) =>
+          isActive ? 'text-yellow-600 border-b-2 border-yellow-600 font-bold' : 'my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
+        }
+      >
+        About us
+      </NavLink>
 
-      <li>
-        <NavLink to="/myRoom">
-          {" "}
-          <a
-            className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
-            href="#"
-          >
-            My Rooms
-          </a>
-        </NavLink>
-      </li>
+      <NavLink 
+        to="/myRoom" 
+        className={({ isActive }) =>
+          isActive ? 'text-yellow-600 border-b-2 border-yellow-600 font-bold' : 'my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
+        }
+      >
+        My Rooms
+      </NavLink>
 
-      <li>
-        <NavLink to="/contact">
-          {" "}
-          <a
-            className="my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0"
-            href="#"
-          >
-            Contact
-          </a>
-        </NavLink>
-      </li>
+      <NavLink 
+        to="/contact" 
+        className={({ isActive }) =>
+          isActive ? 'text-yellow-600 border-b-2 border-yellow-600 font-bold' : 'my-2 text-gray-700 transition-colors duration-300 transform dark:text-gray-200 hover:text-blue-500 dark:hover:text-blue-400 md:mx-4 md:my-0'
+        }
+      >
+        Contact
+      </NavLink>
     </>
   );
-
   return (
-    <div>
-      <nav className="relative bg-gray-200 shadow dark:bg-gray-800">
+    <div className="bg-opacity-60 fixed top-0 left-0 right-0 z-50 shadow-lg">
+      <nav className="relative bg-gray-200 shadow dark:bg-gray-800 ">
         <div className="container px-6 mx-auto md:flex md:justify-between md:items-center h-20">
           <div className="flex items-center justify-between">
             <a href="#">
@@ -206,3 +190,6 @@ const Nav = () => {
 };
 
 export default Nav;
+
+
+
