@@ -19,7 +19,8 @@ const Features = () => {
   return (
     <div className="overflow-x-hidden">
       <div className=" max-w-6xl mx-auto  my-10">
-        <h2 data-aos="fade-left" data-aos-delay="1000" className="text-yellow-600 font-bold text-2xl text-center my-10">Featurs of Room</h2>
+        <h2 data-aos="fade-left" data-aos-delay="1000" className="text-yellow-600 font-bold text-2xl text-center ">Featurs of Room</h2>
+        <p  className="text-gray-600 text-xl text-center mb-16">See our top rooms and visit the hotel.</p>
         <div className="grid grid-cols-1 gap-x-4 gap-y-8 md:grid-cols-2 lg:grid-cols-3  mx-auto">
           { subCard  && subCard.slice(0,3).map((singleFeatures) => (
             <SingleFeatures

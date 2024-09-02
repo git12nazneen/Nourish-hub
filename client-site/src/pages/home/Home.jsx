@@ -9,6 +9,7 @@ import UserReview from "./UserReview";
 import Pagetitle from "../../components/Pagetitle";
 import img from '../../assets/dis.png'
 import HotelBanner from "./HomeBanner";
+import Gallery from "./Gallery";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -65,6 +66,7 @@ const Home = () => {
       <HotelBanner></HotelBanner>
       <Features></Features>
       <Subscribe></Subscribe>
+      <Gallery></Gallery>
       <UserReview></UserReview>
       <Map></Map>
     </div>

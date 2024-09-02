@@ -10,10 +10,10 @@ const SingleFeatures = ({singleFeatures}) => {
         href="#"
       >
         <img
-          class="w-full h-auto rounded-t-xl"
+          class="w-full h-64 rounded-t-xl"
           src={room_images}
         />
-        <div class="p-4 md:p-5">
+        <div class="p-4 md:p-5 h-56">
           <h3 class="text-lg font-bold text-gray-800 dark:text-white">
             {hotel_name}
           </h3>
