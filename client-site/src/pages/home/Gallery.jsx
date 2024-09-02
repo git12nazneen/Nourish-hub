@@ -45,7 +45,7 @@ const Gallery = () => {
           <img
             src="https://i.ibb.co/98WRw0d/pexels-muhammad-tanvir-713696178-18246428.jpg"
             alt="Gallery Image 4"
-            className="w-full h-[200px] sm:h-[250px] md:h-[250px] object-cover rounded-lg shadow-md transition-transform transform group-hover:scale-105"
+            className="w-full h-[200px] sm:h-[250px] lg:h-[350px] object-cover rounded-lg shadow-md transition-transform transform group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
             <p className="text-white text-lg font-semibold">Serene Pool</p>
@@ -55,7 +55,7 @@ const Gallery = () => {
           <img
             src="https://i.ibb.co/gzgdCm4/pexels-eky-rima-nurya-ganda-174710171-15267020.jpg"
             alt="Gallery Image 5"
-            className="w-full h-[200px] sm:h-[250px] md:h-full object-cover rounded-lg shadow-md transition-transform transform group-hover:scale-105"
+            className="w-full h-[200px] sm:h-[250px] lg:h-[350px]  object-cover rounded-lg shadow-md transition-transform transform group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-black bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity rounded-lg flex items-center justify-center">
             <p className="text-white text-lg font-semibold">Tropical Paradise</p>
