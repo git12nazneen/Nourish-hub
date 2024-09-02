@@ -4,8 +4,7 @@ import useAuth from "../../hooks/useAuth";
 
 const SingleReview = ({ singleReview }) => {
   const { name, rating, comment, startDate } = singleReview;
-  const { user } = useAuth();
-  console.log(user);
+ 
   return (
     <div className="p-4">
       <section className="bg-white dark:bg-gray-900">
@@ -18,7 +17,7 @@ const SingleReview = ({ singleReview }) => {
             <div className="flex items-center">
               <img
                 className="object-cover rounded-full w-16 h-16 border-2 border-white"
-                src={user?.photoURL ? user1 : photoURL}
+                src={user1}
                 alt="User"
               />
 
