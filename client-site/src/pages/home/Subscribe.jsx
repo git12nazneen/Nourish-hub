@@ -3,7 +3,7 @@ import baner from '../../assets/ban1.jpg'
 const Subscribe = () => {
     return (
         <div>
-            <div className="w-full dark:bg-gray-400 relative">
+            <div className="w-full dark:bg-gray-400 relative my-20">
                 <div style={{backgroundImage: `url(${baner})`, backgroundPosition: "center center", backgroundBlendMode: "multiply", backgroundRepeat: "no-repeat", backgroundSize: "cover", position: "relative"}}>
                     {/* Dark overlay */}
                     <div className="absolute inset-0 bg-black opacity-50 text-white"></div>

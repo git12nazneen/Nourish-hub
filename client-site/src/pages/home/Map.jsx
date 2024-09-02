@@ -8,7 +8,7 @@ const position = [23.789712258935243, 90.39468674368977];
 const Map = () => {
   return (
     <div>
-      <section className="py-6 dark:bg-gray-100 dark:text-gray-900">
+      <section className="py-6 dark:bg-gray-100 dark:text-gray-900 my-10">
         <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
           <div className="py-6 md:py-0 md:px-6">
             <h1 className="text-4xl font-bold">See our local office.</h1>
