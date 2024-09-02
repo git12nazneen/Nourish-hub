@@ -8,6 +8,7 @@ import Features from "./Features";
 import UserReview from "./UserReview";
 import Pagetitle from "../../components/Pagetitle";
 import img from '../../assets/dis.png'
+import HotelBanner from "./HomeBanner";
 
 const Home = () => {
   const [isOpen, setIsOpen] = useState(true);
@@ -61,6 +62,7 @@ const Home = () => {
       </div>
 
       <Hero></Hero>
+      <HotelBanner></HotelBanner>
       <Features></Features>
       <Subscribe></Subscribe>
       <UserReview></UserReview>
