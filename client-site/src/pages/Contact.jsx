@@ -3,7 +3,7 @@ import Pagetitle from '../components/Pagetitle';
 
 const Contact = () => {
     return (
-        <div className='max-w-6xl mx-auto'>
+        <div className='max-w-6xl mx-auto pt-20'>
               <Pagetitle title='Contact'></Pagetitle>
             <section class="bg-white dark:bg-gray-900">
     <div class="container px-6 py-12 mx-auto">

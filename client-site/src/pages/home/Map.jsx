@@ -10,32 +10,33 @@ const Map = () => {
     <div>
       <section className="py-6 dark:bg-gray-100 dark:text-gray-900 my-10">
         <div className="grid max-w-6xl grid-cols-1 px-6 mx-auto lg:px-8 md:grid-cols-2 md:divide-x">
-          <div className="py-6 md:py-0 md:px-6">
-            <h1 className="text-4xl font-bold">See our local office.</h1>
-            <p className="pt-2 pb-4">
-              You can talk with us in face to face in our office .
-            </p>
-            <div className="space-y-4">
-              <p className="flex items-center">
-                <div className="my-2 mr-5 font-bold">
-                  <SiWelcometothejungle />
-                </div>
-                <span>Welcome our nourish hub</span>
-              </p>
-              <p className="flex items-center">
-                <div className="my-2 mr-5 font-bold">
-                  <MdOutlineSafetyDivider />
-                </div>
-                <span>Have a safe and comfort zone for you.</span>
-              </p>
-              <p className="flex items-center">
-                <div className="my-2 mr-5 font-bold">
-                  <SiGitconnected />
-                </div>
-                <span>Stay with us.</span>
-              </p>
-            </div>
-          </div>
+        <div className="py-6 md:py-0 md:px-6">
+  <h1 className="text-4xl font-bold mb-4 text-gray-800 dark:text-gray-200">Visit Our Local Office</h1>
+  <p className="text-lg text-gray-600 dark:text-gray-300 mb-6">
+    Come meet us in person at our office. We’re here to assist you!
+  </p>
+  <div className="space-y-6">
+    <div className="flex items-center space-x-4">
+      <SiWelcometothejungle className="text-3xl text-yellow-500 dark:text-yellow-400" />
+      <span className="text-xl font-medium text-gray-700 dark:text-gray-300 transition-transform transform hover:translate-x-1">
+        Welcome to our Nourish Hub
+      </span>
+    </div>
+    <div className="flex items-center space-x-4">
+      <MdOutlineSafetyDivider className="text-3xl text-yellow-500 dark:text-yellow-400" />
+      <span className="text-xl font-medium text-gray-700 dark:text-gray-300 transition-transform transform hover:translate-x-1">
+        Enjoy a safe and comfortable space
+      </span>
+    </div>
+    <div className="flex items-center space-x-4">
+      <SiGitconnected className="text-3xl text-yellow-500 dark:text-yellow-400" />
+      <span className="text-xl font-medium text-gray-700 dark:text-gray-300 transition-transform transform hover:translate-x-1">
+        Stay connected with us
+      </span>
+    </div>
+  </div>
+</div>
+
           <div className="flex flex-col py-6 space-y-6 md:py-0 md:px-6">
             <MapContainer
               center={position}

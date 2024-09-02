@@ -23,7 +23,7 @@ const SingleReview = ({ singleReview }) => {
               />
 
               <div className="ml-4">
-                <h1 className="font-semibold text-yellow-200">{name}</h1>
+                <h1 className="font-semibold text-yellow-200 uppercase">{name}</h1>
                 <span className="text-sm text-gray-300">Rating: {rating}</span>
                 <h2 className="text-sm text-gray-300">
                   Date: {new Date(startDate).toLocaleDateString()}
