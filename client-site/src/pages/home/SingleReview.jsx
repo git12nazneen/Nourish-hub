@@ -1,6 +1,5 @@
 import React from "react";
 import user1 from "../../assets/pngwing.com.png";
-import useAuth from "../../hooks/useAuth";
 
 const SingleReview = ({ singleReview }) => {
   const { name, rating, comment, startDate } = singleReview;

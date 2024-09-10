@@ -9,9 +9,7 @@ const HotelBanner = () => {
         <p className="text-gray-400 mb-6">
           Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor in hendrerit in vulputate velit molestie consequat, vel illum dolore eu feugiat nulla facilisis at vero eros et accumsan.
         </p>
-        <button className="bg-white text-yellow-500 border border-yellow-500 px-6 py-2 rounded-md font-semibold hover:bg-yellow-500 hover:text-white transition">
-          MORE DETAILS
-        </button>
+     
       </div>
       <div className="flex-1 relative ">
         <img
